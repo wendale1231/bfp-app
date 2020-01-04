@@ -1,6 +1,6 @@
-# Hello World PhoneGap Template [![bitHound Score][bithound-img]][bithound-url]
+# BFP REPORT APP
 
-A PhoneGap Hello World template
+A HalfByte BFP Reporter App
 
 ## Usage
 
