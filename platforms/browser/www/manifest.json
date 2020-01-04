@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "BFPReport",
+  "short_name": "BFPReport",
+  "version": "com.halfbyte.bfp",
+  "description": "BFP Reporter App",
+  "author": "PhoneGap Team",
+  "icons": [],
+  "start_url": "index.html"
+}
