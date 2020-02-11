@@ -111,7 +111,8 @@
                     <br>
                     <div id="details_cont" style="display: none;">
                         <img id="img" src = ""/>
-                        <input type="text" name="location" id="incident_loc" hidden>
+                        <input type="text" name="location" id="incident_lat" hidden>
+                        <input type="text" name="location" id="incident_long" hidden>
                         <img id="imageURI" src="" hidden>
                         <input type="file" name="image" id="image">
                         <p id="desc"></p>
@@ -147,7 +148,7 @@
                         <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                     </div>
                 </div>
-                <center><button class="btn btn-primary" id="login_btn">Login</button><a href="" class="btn btn-secondary" style="margin: 2%">Register</a></center>
+                <center><button class="btn btn-primary" id="login_btn">Login</button><a class="btn btn-secondary" style="margin: 2%" id="register_btn">Register</a></center>
             <!-- </form> -->
         </div>
     </div>
@@ -155,37 +156,49 @@
     <div id="register" style="display: none;">
         <center><h1>Register Account</h1></center>
         <div class="jumbotron">
-            <form>
                 <div class="form-group row">
-                    <label for="name" class="col-sm-2 col-form-label">Name</label>
+                    <label for="name" class="col-sm-2 col-form-label">First Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                        <input type="text" class="form-control" name="f_name" id="f_name" placeholder="Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="name" class="col-sm-2 col-form-label">Last Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="l_name" id="l_name" placeholder="Name">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="username" class="col-sm-2 col-form-label">Username</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="rusername" id="rusername" placeholder="Username">
+                        <input type="text" class="form-control" name="r-username" id="rusername" placeholder="Username">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="password" class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" name="frpassword" id="frpassword" placeholder="Password">
+                        <input type="password" class="form-control" name="fr-password" id="frpassword" placeholder="Password">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="rpassword" class="col-sm-2 col-form-label">Retype Password</label>
                     <div class="col-sm-10">
-                        <input type="rpassword" class="form-control" name="rpassword" id="rpassword" placeholder="Retype Password">
+                        <input type="password" class="form-control" name="rp-assword" id="rpassword" placeholder="Retype Password">
                     </div>
                 </div>
-            </form>
+                <div class="form-group row">
+                    <label for="image" class="col-sm-2 col-form-label">Upload Valid ID</label>
+                    <div class="col-sm-10">
+                        <input type="file" name="val-id" id="val-id">
+                    </div>
+                </div>
+                <center><a class="btn btn-secondary" id="login_btn">Login</a><a class="btn btn-primary" id="submit_reg">Register</a></center>
         </div>
     </div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/controller/handshake.js"></script>
     <script type="text/javascript" src="js/controller/main.js"></script>
+    <script type="text/javascript" src="js/controller/register.js"></script>
     <script type="text/javascript" src="js/controller/login.js"></script>
     <script type="text/javascript" src="js/controller/sendreport.js"></script>
     <script type="text/javascript" src="js/controller/getreports.js"></script>

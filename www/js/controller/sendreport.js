@@ -20,7 +20,7 @@ $('#send_data').click(function() {
     }
 });
 
-
+/// upload image
 function uploadImage(){
     var imageURI = image_loc;
     var options = new FileUploadOptions();
@@ -31,11 +31,11 @@ function uploadImage(){
     if(ft.upload(
         imageURI, 
         // "http://localhost/bfp/mobile-server/recieve-photo.php",
-        "http://halfbyte.000webhostapp.com/mobile-server/recieve-photo.php",
+        "http://wordpresssample11.000webhostapp.com/mobile-server/recieve-photo.php",
         function(result) {
             // console.log(uploadImage_loc);
             if(uploadData()){
-                alert("INCIDENT REPORTED!!");
+                //alert("INCIDENT REPORTED!!");
             }
             console.log("upload complete: " + JSON.stringify(result));
             return true;
@@ -53,20 +53,35 @@ function uploadImage(){
     }
 
 }
-
+/// upload data to server
 function uploadData(){
     console.log("uploading");
     // console.log(uploadImage_loc);
     var image = document.getElementById("imageURI").val
     console.log(document.getElementById("imageURI").val + " " + image);
+    console.log("image location: " + document.getElementById("incident_lat").val + "," + document.getElementById("incident_long").val);
+    $.ajax({
+        type: "POST",
+        url: "http://wordpresssample11.000webhostapp.com/mobile-server/get-departments.php",
+        data:{
+            'calculate':, 'true',
+            'user_lat': document.getElementById("incident_lat").val,
+            'user_long': document.getElementById("incident_long").val
+        },
+        success: function(response){
+            var dept = JSON.parse(response);
+            alert("Reported to '" + dept.dept_name + "' Which is the nearest Fire Department");
+        }
+    });
     try{
         $.ajax({
             type: "POST",
-            url: "http://halfbyte.000webhostapp.com/mobile-server/recieve-report.php",
+            url: "http://wordpresssample11.000webhostapp.com/mobile-server/recieve-report.php",
             data: {
                 'file_id': image.substr(image.lastIndexOf('/') + 1),
                 'user_id': document.getElementById("user_id").val,
-                'incident_loc': document.getElementById("incident_loc").val
+                'incident_lat': document.getElementById("incident_lat").val,
+                'incident_long': document.getElementById("incident_long").val
             },
             success: function(response){
                 console.log(response);

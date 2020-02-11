@@ -13,7 +13,7 @@ function handshake(){
     if(
     $.ajax({
         // url         : 'http://localhost/bfp/mobile-server/handshake.php',     // point to server-side PHP script 
-        url         : "http://halfbyte.000webhostapp.com/mobile-server/handshake.php",
+        url         : "http://wordpresssample11.000webhostapp.com/mobile-server/handshake.php",
         dataType    : 'text',           // what to expect back from the PHP script, if anything
         cache       : false,
         contentType : false,
