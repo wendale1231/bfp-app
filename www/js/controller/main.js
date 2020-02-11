@@ -64,57 +64,59 @@ function get_data(data){
     console.log(data);
     console.log(dept_data);
     navigator.geolocation.getCurrentPosition(function(position) {
-    var point = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    // Initialize the Google Maps API v3
-    your_loc = "Your Coordinates is: latitude: " + position.coords.latitude +
-                ", longitude: " + position.coords.longitude;
-    var map = new google.maps.Map(document.getElementById('map_canvas'), {
-        zoomControl: false,
-        mapTypeControl: false,
-        scaleControl: false,
-        streetViewControl: false,
-        rotateControl: false,
-        zoom: 26,
-        center: point,
-        mapTypeId: google.maps.MapTypeId.SATELLITE
-    });
-    try{
-        dept_data.forEach(function (arrayItem) {
-            console.log(arrayItem.dept_name);
-            var dept_points = new google.maps.LatLng(arrayItem.dept_lat, arrayItem.dept_long);
-            var dept_marker = new google.maps.Marker({
-                position: dept_points,
-                map: map,
-                title: arrayItem.dept_name
-            });
-            // attachDeptName(marker, arrayItem.dept_name);
+        var point = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        // Initialize the Google Maps API v3
+        your_loc = "Your Coordinates is: latitude: " + position.coords.latitude +
+                    ", longitude: " + position.coords.longitude;
+        var map = new google.maps.Map(document.getElementById('map_canvas'), {
+            zoomControl: false,
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            rotateControl: false,
+            zoom: 26,
+            center: point,
+            mapTypeId: google.maps.MapTypeId.SATELLITE
         });
-        // console.log(data);
-    }catch(e){
-        console.log(e);
-    }
-    // Place a marker
-    var marker = new google.maps.Marker({
-        position: point,
-        map: map,
-        title: "This is your Location"
+        try{
+            dept_data.forEach(function (arrayItem) {
+                if(arrayItem){
+                    console.log(arrayItem.dept_name);
+                    var dept_points = new google.maps.LatLng(arrayItem.dept_lat, arrayItem.dept_long);
+                    var dept_marker = new google.maps.Marker({
+                        position: dept_points,
+                        map: map,
+                        title: arrayItem.dept_name
+                    });
+                    // attachDeptName(marker, arrayItem.dept_name);
+                }
+            });
+            // console.log(data);
+            // Place a marker
+            var marker = new google.maps.Marker({
+                position: point,
+                map: map,
+                title: "This is your Location"
+            });
+            document.getElementById("incident_lat").val = position.coords.latitude;
+            document.getElementById("incident_long").val = position.coords.longitude;
+            var contentString = '<div id="content">'+
+                'This is your location' +
+                '</div>';
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+            });
+        }catch(e){
+            console.log("ERROR!" + e);
+        }
     });
-    document.getElementById("incident_lat").val = position.coords.latitude;
-    document.getElementById("incident_long").val = position.coords.longitude;
-    var contentString = '<div id="content">'+
-        '<img alt="image of the incident" style="width:150px" id="map_img" src="' + imageURI +'" style="color: black;">' +
-        '</div>';
-    var infowindow = new google.maps.InfoWindow({
-        content: contentString
-    });
-    marker.addListener('click', function() {
-        infowindow.open(map, marker);
-    });
-});
 }
 
 
-
+var imageURI = "";
 function onSuccess(imageURI) {
     try{
         document.getElementById("imageURI").val = imageURI;
@@ -134,7 +136,7 @@ function onSuccess(imageURI) {
                         console.log(response);
                         try{
                             dept_data = JSON.parse(response);
-                            get_data(dept_data,imageURI);
+                            get_data(dept_data);
 
                         }catch(e){
                             console.log(e);

@@ -1,6 +1,7 @@
 // This file will control the sending of data thru the database
 
 $('#send_data').click(function() {
+    console.log("clicked send report");
     if(handshake()){
         try{
             console.log(image_loc);
@@ -64,7 +65,7 @@ function uploadData(){
         type: "POST",
         url: "http://wordpresssample11.000webhostapp.com/mobile-server/get-departments.php",
         data:{
-            'calculate':, 'true',
+            'calculate': 'true',
             'user_lat': document.getElementById("incident_lat").val,
             'user_long': document.getElementById("incident_long").val
         },
