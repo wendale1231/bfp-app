@@ -61,31 +61,32 @@ function uploadData(){
     var image = document.getElementById("imageURI").val
     console.log(document.getElementById("imageURI").val + " " + image);
     console.log("image location: " + document.getElementById("incident_lat").val + "," + document.getElementById("incident_long").val);
-    $.ajax({
-        type: "POST",
-        url: "http://wordpresssample11.000webhostapp.com/mobile-server/get-departments.php",
-        data:{
-            'calculate': 'true',
-            'user_lat': document.getElementById("incident_lat").val,
-            'user_long': document.getElementById("incident_long").val
-        },
-        success: function(response){
-            var dept = JSON.parse(response);
-            alert("Reported to '" + dept.dept_name + "' Which is the nearest Fire Department");
-        }
-    });
     try{
         $.ajax({
             type: "POST",
-            url: "http://wordpresssample11.000webhostapp.com/mobile-server/recieve-report.php",
-            data: {
-                'file_id': image.substr(image.lastIndexOf('/') + 1),
-                'user_id': document.getElementById("user_id").val,
-                'incident_lat': document.getElementById("incident_lat").val,
-                'incident_long': document.getElementById("incident_long").val
+            url: "http://wordpresssample11.000webhostapp.com/mobile-server/get-departments.php",
+            data:{
+                'calculate': 'true',
+                'user_lat': document.getElementById("incident_lat").val,
+                'user_long': document.getElementById("incident_long").val
             },
             success: function(response){
-                console.log(response);
+                var dept = JSON.parse(response);
+                alert("Reported to '" + dept.dept_name + "' Which is the nearest Fire Department");
+                $.ajax({
+                    type: "POST",
+                    url: "http://wordpresssample11.000webhostapp.com/mobile-server/recieve-report.php",
+                    data: {
+                        'file_id': image.substr(image.lastIndexOf('/') + 1),
+                        'user_id': document.getElementById("user_id").val,
+                        'incident_lat': document.getElementById("incident_lat").val,
+                        'incident_long': document.getElementById("incident_long").val,
+                        'dept_id': dept.dept_id
+                    },
+                    success: function(response){
+                        console.log(response);
+                    }
+                });
             }
         });
     }catch(e){

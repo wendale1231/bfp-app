@@ -17,14 +17,20 @@ $('#login_btn').click(function(){
             },
             success: function(data) {
                 var profile_data;
-                try{
+                try{//filtering accounts if its admin or not
                     profile_data = JSON.parse(data.toString());
-                    console.log(profile_data);
+                    console.log(data);
                     document.getElementById("login").style.display = "none";
-                    document.getElementById("home").style.display = "block";
-                    document.getElementById("dropdown01").innerHTML = profile_data.first_name;
-                    document.getElementById("user_id").val = profile_data.u_reg_id;
-                    console.log(document.getElementById("user_id").val);
+                    if(parseInt(profile_data.dept_id)){
+                        alert("your account is admin");
+                        document.getElementById("admin").style.display = "block";
+                    }
+                    else{                        
+                        document.getElementById("home").style.display = "block";
+                        document.getElementById("dropdown01").innerHTML = profile_data.first_name;
+                        document.getElementById("user_id").val = profile_data.u_reg_id;
+                        console.log(document.getElementById("user_id").val);
+                    }
                 }
                 catch(e){
                     alert("Wrong Username or Password");
